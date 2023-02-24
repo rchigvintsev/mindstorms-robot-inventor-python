@@ -37,10 +37,10 @@ shopping_cart_shake_timer = Timer()
 arm_motor_pair = MotorPair('F', 'B')
 
 left_leg_motor = Motor('A')
-left_leg_motor.set_default_speed(-70)
+left_leg_motor.set_default_speed(-60)
 
 right_leg_motor = Motor('E')
-right_leg_motor.set_default_speed(70)
+right_leg_motor.set_default_speed(60)
 
 def start_animation_blinking():
     hub.light_matrix.start_animation(ANIM_BLINKING, 8, True, 'overlay', False)
@@ -76,16 +76,16 @@ def shake_shopping_cart():
     yield from shopping_cart_shake_delay()
 
     start_animation_silly()
-    
+
     for i in range(5):
         shopping_cart_shake_timer.reset()
-        arm_motor_pair.start(0, -40)
+        arm_motor_pair.start(0, -30)
         while shopping_cart_shake_timer.now() < 0.3:
             yield True
         arm_motor_pair.stop()
 
         shopping_cart_shake_timer.reset()
-        arm_motor_pair.start(0, 40)
+        arm_motor_pair.start(0, 30)
         while shopping_cart_shake_timer.now() < 0.2:
             yield True
         arm_motor_pair.stop()
