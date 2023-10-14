@@ -12,7 +12,6 @@ distance_sensor = DistanceSensor('D')
 distance_sensor.light_up_all()
 
 while True:
-    distance = distance_sensor.get_distance_cm()
-    if distance != None and distance < 10:
-        motor_pair.move(71, 'cm', 100)
-        motor_pair.move(71, 'cm', -100)
+    distance_sensor.wait_for_distance_closer_than(10, 'cm')
+    motor_pair.move(71, 'cm', 100)
+    motor_pair.move(71, 'cm', -100)
