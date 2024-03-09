@@ -46,7 +46,7 @@ wheels_motor_pair = MotorPair('C', 'A')
 wheels_motor_pair.set_default_speed(10)
 
 left_wheel_motor = Motor('C')
-hands_motor = Motor('D')
+arms_and_head_motor = Motor('D')
 trigger_motor = Motor('B')
 
 distance_sensor = DistanceSensor('F')
@@ -65,12 +65,22 @@ def start_animation_shut_down():
     hub.light_matrix.start_animation(ANIM_SHUT_DOWN, 6, False, 'overlay', False)
 
 def calibrate():
-    hands_motor.start(100)
-    wait_for_seconds(0.5)
-    while hands_motor.get_speed() > 0:
+    timer = Timer()
+    arms_and_head_motor.start_at_power(100)
+    wait_for_seconds(0.3)
+    while arms_and_head_motor.get_speed() > 50 and timer.now() < 3:
         pass
-    hands_motor.stop()
-    hands_motor.run_for_degrees(-840, 60)
+    arms_and_head_motor.stop()
+    wait_for_seconds(0.2)
+    hub.motion_sensor.reset_yaw_angle()
+    wait_for_seconds(0.1)
+    timer.reset()
+    arms_and_head_motor.start(-50)
+    while hub.motion_sensor.get_yaw_angle() > -42 and timer.now() < 2:
+        pass
+    arms_and_head_motor.stop()
+    wait_for_seconds(0.2)
+    arms_and_head_motor.set_degrees_counted(0)
 
 def is_enemy_detected():
     distance = distance_sensor.get_distance_cm()
@@ -92,14 +102,14 @@ def scan_room(direction):
             distance_sensor.light_up(100, 100, 100, 100)
             start_animation_crosshair()
             hub.speaker.play_sound('Target Acquired')
-            hands_motor.run_for_rotations(3, -100)
+            arms_and_head_motor.run_for_rotations(3, -100)
             hub.speaker.start_sound('Laser')
             trigger_motor.run_for_seconds(0.4, 100)
             hub.speaker.start_sound('Laser')
             trigger_motor.run_for_degrees(-140, 100)
             trigger_motor.run_for_degrees(60, 100)
             wait_for_seconds(1)
-            hands_motor.run_for_rotations(1.5, 100)
+            arms_and_head_motor.run_for_rotations(1.5, 100)
             start_animation_shut_down()
             hub.speaker.play_sound('Shut Down')
             raise SystemExit
@@ -112,7 +122,7 @@ def scan_room(direction):
 
 start_animation_scanning()
 calibrate()
-hands_motor.run_for_rotations(1.8, 100)
+arms_and_head_motor.run_for_rotations(1.8, 100)
 
 while True:
     scan_room(DIRECTION_LEFT)
