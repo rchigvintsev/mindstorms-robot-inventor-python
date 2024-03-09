@@ -38,7 +38,7 @@ ANIM_TARGET_DESTROYED = [
 ]
 
 wheels_motor_pair = MotorPair('C', 'A')
-hands_motor = Motor('D')
+arms_and_head_motor = Motor('D')
 trigger_motor = Motor('B')
 
 hub = MSHub()
@@ -52,17 +52,27 @@ def start_animation_target_destroyed():
     hub.light_matrix.start_animation(ANIM_TARGET_DESTROYED, 4, False, 'overlay', False)
 
 def calibrate():
-    hands_motor.start(100)
-    wait_for_seconds(0.5)
-    while hands_motor.get_speed() > 0:
+    timer = Timer()
+    arms_and_head_motor.start_at_power(100)
+    wait_for_seconds(0.3)
+    while arms_and_head_motor.get_speed() > 50 and timer.now() < 3:
         pass
-    hands_motor.stop()
-    hands_motor.run_for_degrees(-840, 60)
+    arms_and_head_motor.stop()
+    wait_for_seconds(0.2)
+    hub.motion_sensor.reset_yaw_angle()
+    wait_for_seconds(0.1)
+    timer.reset()
+    arms_and_head_motor.start(-50)
+    while hub.motion_sensor.get_yaw_angle() > -42 and timer.now() < 2:
+        pass
+    arms_and_head_motor.stop()
+    wait_for_seconds(0.2)
+    arms_and_head_motor.set_degrees_counted(0)
 
 start_animation_scanning()
 calibrate()
 wheels_motor_pair.move(5, 'cm', -100)
-hands_motor.run_for_rotations(1.2, -60)
+arms_and_head_motor.run_for_rotations(1.2, -60)
 hub.speaker.start_sound('Laser')
 trigger_motor.run_for_seconds(0.4, 100)
 hub.speaker.start_sound('Laser')
