@@ -53,7 +53,7 @@ def start_animation_target_destroyed():
 
 def calibrate():
     hands_motor.start(100)
-    wait_for_seconds(0.1)
+    wait_for_seconds(0.5)
     while hands_motor.get_speed() > 0:
         pass
     hands_motor.stop()
