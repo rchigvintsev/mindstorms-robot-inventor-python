@@ -75,7 +75,6 @@ def calibrate():
 def is_enemy_detected():
     distance = distance_sensor.get_distance_cm()
     return distance != None and distance < 40
-        
 
 def scan_room(direction):
     hub.speaker.start_sound('Scanning')
