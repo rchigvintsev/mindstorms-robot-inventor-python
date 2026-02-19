@@ -8,7 +8,6 @@ from utime import ticks_diff, ticks_ms
 
 import hub
 import math
-import array
 
 WAIT_TIME = 0.03
 

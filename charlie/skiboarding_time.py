@@ -1,7 +1,6 @@
 from mindstorms import MSHub, Motor, MotorPair, ColorSensor, DistanceSensor, App
 from mindstorms.control import wait_for_seconds, wait_until, Timer
 from mindstorms.operator import greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to
-import math
 
 ANIM_COOL = ['00000:77077:99999:99099:00000', '77000:00077:99999:99099:00000'] * 2 + ['00000:77077:00000:99999:99099', '00077:77000:99999:99099:00000'] * 2
 ARMS_SPEED = 60

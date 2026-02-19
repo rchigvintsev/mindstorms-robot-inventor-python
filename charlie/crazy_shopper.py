@@ -4,8 +4,6 @@ from mindstorms.operator import greater_than, greater_than_or_equal_to, less_tha
 
 from utime import ticks_diff, ticks_ms
 
-import math
-
 class Timer():
     """Replacement Timer class that allows decimal points so we can measure times of less than one second."""
     def __init__(self):

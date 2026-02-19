@@ -1,7 +1,6 @@
 from mindstorms import MSHub, Motor, MotorPair, ColorSensor
 from mindstorms.control import wait_for_seconds, Timer
 from mindstorms.operator import greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to
-import math
 
 ANIM_EQUALIZER = [
     '11111:18111:17717:66616:55555',
