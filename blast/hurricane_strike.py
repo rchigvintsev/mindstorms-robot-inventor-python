@@ -1,6 +1,5 @@
-from mindstorms import MSHub, Motor, MotorPair, ColorSensor, DistanceSensor, App
-from mindstorms.control import wait_for_seconds, wait_until, Timer
-from mindstorms.operator import greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to
+from mindstorms import MSHub, Motor, MotorPair, DistanceSensor
+from mindstorms.control import wait_for_seconds, Timer
 
 ANIM_SCANNING = [
     '00000:00000:56789:00000:00000',

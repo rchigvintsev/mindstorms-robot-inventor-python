@@ -1,6 +1,6 @@
-from mindstorms import MSHub, Motor, MotorPair, ColorSensor, DistanceSensor, App
-from mindstorms.control import wait_for_seconds, wait_until, Timer
-from mindstorms.operator import greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, not_equal_to
+from mindstorms import MSHub, Motor, MotorPair, ColorSensor, DistanceSensor
+from mindstorms.control import wait_for_seconds
+from mindstorms.operator import less_than, equal_to, not_equal_to
 
 WHEEL_DIAMETER = 56.4 # Robot wheel diameter in millimeters
 
